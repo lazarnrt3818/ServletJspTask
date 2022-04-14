@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import it.engineering.webapp.domain.Manufacturer;
+import it.engineering.webapp.domain.User;
 import it.engineering.webapp.util.MyEntityManagerFactory;
 
 public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, Long>{
@@ -42,8 +43,13 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
 		
+		manager.getTransaction().begin();
+		manager.remove(manufacturer);
+		manager.getTransaction().commit();
+		manager.close();
 	}
 
 
