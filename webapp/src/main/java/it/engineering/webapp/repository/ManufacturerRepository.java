@@ -33,8 +33,11 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public Optional<Manufacturer> getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
+		
+		manager.close();
+		return Optional.of(manufacturer);
 	}
 
 	@Override
