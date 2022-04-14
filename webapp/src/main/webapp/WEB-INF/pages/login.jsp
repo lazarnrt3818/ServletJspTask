@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,8 +13,9 @@
   </head>
   <body>
     <jsp:include page="/WEB-INF/pages/fragments/header.jsp"></jsp:include>
+    <c:url value="/application/login" var="urlPostLogin"></c:url>
 	<div class="container-sm">
-	<form action="application/login" method="post">
+	<form action="${urlPostLogin}" method="post">
 		<div class="mb-3">
 			<label for="username" class="form-label">Username</label>
 				 <input type="text" class="form-control"
