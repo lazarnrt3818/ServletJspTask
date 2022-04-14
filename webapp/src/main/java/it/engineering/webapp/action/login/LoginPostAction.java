@@ -1,5 +1,7 @@
 package it.engineering.webapp.action.login;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,24 +9,46 @@ import javax.servlet.http.HttpSession;
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.domain.User;
+import it.engineering.webapp.repository.UserRepository;
 
 public class LoginPostAction extends AbstractAction {
 
-	@SuppressWarnings("unused")
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		User user = new User("user", "user", null, null);
 		
-		if (user != null) {
+		
+		User user = login(request);
+		if (user != null && request.getSession().getAttribute("loginUser") == null) {
 			HttpSession session = request.getSession(true);
 			User loginUser = user.clone();
 			session.setAttribute("loginUser",loginUser);
 			return WebConstant.PAGE_HOME;
 		} else {
-			request.setAttribute("error_message", "Korisnik ne postoji !");
+			request.setAttribute("error_message", "Wrong credentials !");
 			return WebConstant.PAGE_LOGIN;
 		}
 	}
 
+	
+	private User login(HttpServletRequest request) {
+		
+
+		UserRepository userRepo = new UserRepository();
+		
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		User user = new User(username, password, null, null);
+		
+		List<User> users = 	userRepo.getAll();
+		
+		for(User current : users) {
+			if (current.equals(user)) {
+				return current;
+			}
+		}
+		return null;
+	}
 }
