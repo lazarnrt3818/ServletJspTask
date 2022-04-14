@@ -1,11 +1,35 @@
 package it.engineering.webapp.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_User")
 	private Long id;
 	private String username;
 	private String password;
+	@Column(name = "First_name")
 	private String firstName;
+	@Column(name = "Last_name")
 	private String lastName;
+
+	public User() {
+		super();
+	}
+
+	public User(String username, String password, String firstName, String lastName) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public Long getId() {
 		return id;
@@ -47,16 +71,15 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public User(String username, String password, String firstName, String lastName) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
 	public User clone() {
-		return new User(username,null,firstName,lastName);
+		return new User(username, null, firstName, lastName);
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + "]";
+	}
+
+	
 }
