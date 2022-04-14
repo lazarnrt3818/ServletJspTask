@@ -23,9 +23,12 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 	}
 
 	@Override
-	public void save(Manufacturer t) {
-		// TODO Auto-generated method stub
-		
+	public void save(Manufacturer manufacturer) {
+		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(manufacturer);
+		manager.getTransaction().commit();
+		manager.close();
 	}
 
 	@Override
