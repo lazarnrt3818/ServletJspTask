@@ -52,5 +52,22 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 		manager.close();
 	}
 
+	@Override
+	public void update(Manufacturer t) {
+		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+	
+		Manufacturer manufacturer = manager.find(Manufacturer.class, t.getId());
+		
+		manager.getTransaction().begin();
+		if(manufacturer != null) {
+			manufacturer.setAddress(t.getAddress());
+			manufacturer.setCid(t.getCid());
+			manufacturer.setPib(t.getPib());
+			manufacturer.setCity(t.getCity());
+		}
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
 
 }

@@ -9,4 +9,5 @@ public interface JpaCrudRepository<T,ID> {
 	public Optional<T> getById(ID id);
 	public void delete(ID id);
 	public List<T> getAll();
+	public void update(T t);
 }

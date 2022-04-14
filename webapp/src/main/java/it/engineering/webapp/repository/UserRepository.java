@@ -55,6 +55,12 @@ public class UserRepository implements JpaCrudRepository<User, Long> {
 		
 		return users;
 	}
+
+	@Override
+	public void update(User t) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
