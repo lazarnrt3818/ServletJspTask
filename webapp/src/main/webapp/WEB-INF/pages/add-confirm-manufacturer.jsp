@@ -9,37 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Edit manufacturer</title>
+    <title>Add manufacturer</title>
   </head>
   <body>
     <jsp:include page="/WEB-INF/pages/fragments/header.jsp"></jsp:include>
-	<c:url value="/application/manufacturer/edit/confirm" var="urlManufacturerEdit"></c:url>
+	<c:url value="/application/manufacturer/add/confirm" var="urlManufacturerEdit"></c:url>
 	<div class="col-6 me-3">
-		<form action="${urlManufacturerEdit }" method="post">
+		<form action="${urlManufacturerEdit }" >
 			<div class="mb-3">
 				<label for="exampleInputEmail1" class="form-label">PIB</label> 
 				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${manufacturer.pib}" readonly name="pib">
 
 			</div>
-			<div class="mb-3">
-				<input type="hidden" class="form-control" id="exampleInputEmail1" value="${manufacturer.id}" name="id">
-			</div>
+			
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">CID</label>
 				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${manufacturer.cid}" readonly name="cid">
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">Address</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${manufacturer.address}" name="address">
+				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${manufacturer.address}" readonly name="address">
 			</div>
 			<div class="mb-3">
-				<select class="form-select" aria-label="Default select example" name="city">
-					<c:forEach items="${cities}" var="city">
-						<option value="${city.zipCode}">${city}</option>
-					</c:forEach>
-				</select>
+				<input type="text" name="city" value="${manufacturer.city.zipCode}" readonly/>
 			</div>
-			<input type="submit" class="btn btn-primary" name="option" value="Edit"/>
+			<input type="submit" class="btn btn-primary" name="option" value="Confirm"/>
 			<input type="submit" class="btn btn-danger" name="option" value="Cancel"/>
 		</form>
 	</div>

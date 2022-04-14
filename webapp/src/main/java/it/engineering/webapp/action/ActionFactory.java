@@ -3,6 +3,8 @@ package it.engineering.webapp.action;
 import it.engineering.webapp.action.login.LoginGetAction;
 import it.engineering.webapp.action.login.LoginPostAction;
 import it.engineering.webapp.action.logout.LogoutAction;
+import it.engineering.webapp.action.manufacturer.ManufacturerAddAction;
+import it.engineering.webapp.action.manufacturer.ManufacturerAddConfirmAction;
 import it.engineering.webapp.action.manufacturer.ManufacturerDeleteAction;
 import it.engineering.webapp.action.manufacturer.ManufacturerDeleteConfirmAction;
 import it.engineering.webapp.action.manufacturer.ManufacturerEditAction;
@@ -38,6 +40,14 @@ public class ActionFactory {
 			case WebConstant.PATH_MANUFACTURER_EDIT_CONFIRM:
 				action = new ManufacturerEditConfirmAction();
 				break;
+				
+			case WebConstant.PATH_MANUFACTURER_ADD:
+				action = new ManufacturerAddAction();
+				break;
+				
+			case WebConstant.PATH_MANUFACTURER_ADD_CONFIRM:
+				action = new ManufacturerAddConfirmAction();
+				break;	
 			case WebConstant.PATH_LOGOUT:
 				action = new LogoutAction();
 				break;

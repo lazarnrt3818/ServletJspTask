@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.domain.User;
+import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.repository.UserRepository;
 
@@ -27,10 +28,12 @@ public class LoginPostAction extends AbstractAction {
 
 			HttpSession session = request.getSession(true);
 			ManufacturerRepository manufacturerRepo = new ManufacturerRepository();
+			CityRepository cityRepo = new CityRepository();
+			
 			User loginUser = user.clone();
 			session.setAttribute("loginUser",loginUser);
 			session.setAttribute("manufacturers", manufacturerRepo.getAll());
-
+			request.setAttribute("cities", cityRepo.getAll());
 			return WebConstant.PAGE_HOME;
 		} else {
 			request.setAttribute("error_message", "Wrong credentials !");

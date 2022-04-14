@@ -34,7 +34,7 @@
 			<tr>
 				<td> 
 				Are you sure ? 
-				<form action="${urlManufacturerDelete}">
+				<form action="${urlManufacturerDelete}" method="post">
 					  <input type="submit" class="btn btn-danger" value="Delete" name="option"/>
 					  <input type="submit" class="btn btn-info" value="Cancel" name="option"/>
 					  <input type="hidden" value="${manufacturer.id}" name="id"/>

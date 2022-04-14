@@ -1,28 +1,29 @@
 package it.engineering.webapp.action.manufacturer;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
+import it.engineering.webapp.domain.City;
+import it.engineering.webapp.domain.Manufacturer;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
 
-public class ManufacturerDeleteConfirmAction extends AbstractAction{
+public class ManufacturerAddAction extends AbstractAction{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO DELETE manufacturer
 		ManufacturerRepository manuRepo = new ManufacturerRepository();
 		CityRepository cityRepo = new CityRepository();
-		if(request.getParameter("option").equalsIgnoreCase("Delete")) {
-			manuRepo.delete(Long.parseLong(request.getParameter("id")));
-		}
-		request.setAttribute("manufacturers", manuRepo.getAll());
-		request.setAttribute("cities", cityRepo.getAll());
-		return WebConstant.PAGE_HOME;
-	
+		Manufacturer manufacturer = new Manufacturer();
+		manufacturer.setAddress(request.getParameter("address"));
+		manufacturer.setCid(request.getParameter("cid"));
+		manufacturer.setPib(request.getParameter("pib"));
+		City city = cityRepo.getById(Long.parseLong(request.getParameter("city"))).orElse(null);
+		manufacturer.setCity(city);
+		request.setAttribute("manufacturer", manufacturer);
+		return WebConstant.PAGE_MANUFACTURER_ADD;
 	}
 
 }
