@@ -26,12 +26,13 @@
 		<tbody>
 		<c:forEach items="${manufacturers}" var="manufacturer">
 		<c:url value="/application/manufacturer/delete?id=${manufacturer.id}" var="urlManufacturerDelete"></c:url>
+		<c:url value="/application/manufacturer/edit?id=${manufacturer.id}" var="urlManufacturerEdit"></c:url>
 			<tr>
 				<td>${manufacturer.pib}</td>
 				<td>${manufacturer.cid}</td>
 				<td>${manufacturer.address}</td>
 				<td>${manufacturer.city}</td>
-				<td><a href="#" class="link-warning">Edit</a> <a href="${urlManufacturerDelete}" class="link-danger">Delete</a></td>
+				<td><a href="${urlManufacturerEdit}" class="link-warning">Edit</a> <a href="${urlManufacturerDelete}" class="link-danger">Delete</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

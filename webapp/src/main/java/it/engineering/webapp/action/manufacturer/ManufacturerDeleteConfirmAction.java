@@ -14,8 +14,11 @@ public class ManufacturerDeleteConfirmAction extends AbstractAction{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO DELETE manufacturer
 		ManufacturerRepository manuRepo = new ManufacturerRepository();
-		manuRepo.delete(Long.parseLong(request.getParameter("id")));
-		request.setAttribute("manufacturers", new ManufacturerRepository().getAll());
+		
+		if(request.getParameter("option").equalsIgnoreCase("Delete")) {
+			manuRepo.delete(Long.parseLong(request.getParameter("id")));
+		}
+		request.setAttribute("manufacturers", manuRepo.getAll());
 		return WebConstant.PAGE_HOME;
 	
 	}

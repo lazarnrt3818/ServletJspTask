@@ -32,7 +32,14 @@
 				<td>${manufacturer.city}</td>
 			</tr>
 			<tr>
-				<td> Are you sure ? <a href="${urlManufacturerDelete}" class="link-danger">Delete</a> <a href="${urlManufacturerDelete}" class="link-info">Cancel</a></td>
+				<td> 
+				Are you sure ? 
+				<form action="${urlManufacturerDelete}">
+					  <input type="submit" class="btn btn-danger" value="Delete" name="option"/>
+					  <input type="submit" class="btn btn-info" value="Cancel" name="option"/>
+					  <input type="hidden" value="${manufacturer.id}" name="id"/>
+				</form>
+				</td>
 			</tr>
 		</tbody>
 	</table>

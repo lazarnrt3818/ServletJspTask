@@ -5,6 +5,8 @@ import it.engineering.webapp.action.login.LoginPostAction;
 import it.engineering.webapp.action.logout.LogoutAction;
 import it.engineering.webapp.action.manufacturer.ManufacturerDeleteAction;
 import it.engineering.webapp.action.manufacturer.ManufacturerDeleteConfirmAction;
+import it.engineering.webapp.action.manufacturer.ManufacturerEditAction;
+import it.engineering.webapp.action.manufacturer.ManufacturerEditConfirmAction;
 import it.engineering.webapp.constant.WebConstant;
 
 public class ActionFactory {
@@ -29,6 +31,13 @@ public class ActionFactory {
 				action = new ManufacturerDeleteConfirmAction();
 				break;
 				
+			case WebConstant.PATH_MANUFACTURER_EDIT:
+				action = new ManufacturerEditAction();
+				break;
+				
+			case WebConstant.PATH_MANUFACTURER_EDIT_CONFIRM:
+				action = new ManufacturerEditConfirmAction();
+				break;
 			case WebConstant.PATH_LOGOUT:
 				action = new LogoutAction();
 				break;

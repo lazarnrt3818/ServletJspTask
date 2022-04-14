@@ -16,6 +16,11 @@ public interface WebConstant {
 
 		public static final String PATH_MANUFACTURER_DELETE_CONFIRM = "/manufacturer/delete/confirm";
 		
+		public static final String PATH_MANUFACTURER_EDIT = "/manufacturer/edit";
+		public static final String PAGE_MANUFACTURER_EDIT = "/WEB-INF/pages/edit-manufacturer.jsp";
+		
+		public static final String PATH_MANUFACTURER_EDIT_CONFIRM = "/manufacturer/edit/confirm";
+		
 		//		public static final String PAGE_CITY_ADD = "/WEB-INF/pages/add_city.jsp";
 //		public static final String PATH_CITY_ADD = "/add_city";
 //		public static final String PAGE_CITIES = "/WEB-INF/pages/city/cities.jsp";
