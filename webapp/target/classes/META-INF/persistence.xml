@@ -4,6 +4,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 	<persistence-unit name="webapp">
 		<class>it.engineering.webapp.domain.User</class>
 		<class>it.engineering.webapp.domain.City</class>
+		<class>it.engineering.webapp.domain.Manufacturer</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/servletjsp"/>
