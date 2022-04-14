@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import it.engineering.webapp.domain.Manufacturer;
-import it.engineering.webapp.domain.User;
 import it.engineering.webapp.util.MyEntityManagerFactory;
 
 public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, Long>{
@@ -15,7 +14,7 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 	@Override
 	public List<Manufacturer> getAll() {
 		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
-		Query query = manager.createQuery("SELECT c FROM User c");
+		Query query = manager.createQuery("SELECT m FROM Manufacturer m");
 		
 		@SuppressWarnings("unchecked")
 		List<Manufacturer> manufacturers = query.getResultList();

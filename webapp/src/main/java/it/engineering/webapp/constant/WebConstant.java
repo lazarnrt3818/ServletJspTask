@@ -8,9 +8,15 @@ public interface WebConstant {
 		public static final String PATH_LOGOUT = "/logout";
 
 		public static final String PAGE_HOME = "/WEB-INF/pages/home.jsp";
+		public static final String PATH_HOME = "/home";
 		public static final String PAGE_INDEX = "/index.jsp";
 		
-//		public static final String PAGE_CITY_ADD = "/WEB-INF/pages/add_city.jsp";
+		public static final String PATH_MANUFACTURER_DELETE = "/manufacturer/delete";
+		public static final String PAGE_MANUFACTURER_DELETE = "/WEB-INF/pages/delete-manufacturer.jsp";
+
+		public static final String PATH_MANUFACTURER_DELETE_CONFIRM = "/manufacturer/delete/confirm";
+		
+		//		public static final String PAGE_CITY_ADD = "/WEB-INF/pages/add_city.jsp";
 //		public static final String PATH_CITY_ADD = "/add_city";
 //		public static final String PAGE_CITIES = "/WEB-INF/pages/city/cities.jsp";
 //		public static final String PATH_CITY = "/city";

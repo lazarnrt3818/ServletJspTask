@@ -12,12 +12,24 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
+        	
         	<c:url value="/application/login" var="urlLogin"></c:url>
-          <a class="nav-link" href="${urlLogin}">Login</a>
-        </li>
-     
-        </li>
+        	<c:url value="/application/logout" var="urlLogout"></c:url>
+       
+        	<c:if test="${loginUser == null}" >
+				<li class="nav-item"><a class="nav-link" href="${urlLogin}">Login</a></li>
+			</c:if>
+
+          	<c:if test="${loginUser != null}" >
+          		 <li class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">${loginUser.username}</a>
+					    <ul class="dropdown-menu">
+						      <li><a class="dropdown-item" href="${urlLogout}">Logout</a></li>
+					    </ul>
+				  </li>
+          	</c:if>
+          	</a>
+       
       </ul>
     </div>
   </div>

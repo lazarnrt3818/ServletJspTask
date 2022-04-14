@@ -9,20 +9,28 @@ import javax.servlet.http.HttpSession;
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.domain.User;
+import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.repository.UserRepository;
 
 public class LoginPostAction extends AbstractAction {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		
+		//List<User> users =  (List<User>)request.getServletContext().getAttribute("login_users");
+		//&& !users.contains(user)
 		
 		User user = login(request);
-		if (user != null && request.getSession().getAttribute("loginUser") == null) {
+		
+		if (user != null) {
+			
+			//users.add(user);
+
 			HttpSession session = request.getSession(true);
+			ManufacturerRepository manufacturerRepo = new ManufacturerRepository();
 			User loginUser = user.clone();
 			session.setAttribute("loginUser",loginUser);
+			session.setAttribute("manufacturers", manufacturerRepo.getAll());
+
 			return WebConstant.PAGE_HOME;
 		} else {
 			request.setAttribute("error_message", "Wrong credentials !");

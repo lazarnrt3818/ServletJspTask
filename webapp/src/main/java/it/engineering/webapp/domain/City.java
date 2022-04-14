@@ -39,6 +39,6 @@ public class City {
 
 	@Override
 	public String toString() {
-		return "City [zipCode=" + zipCode + ", name=" + name + "]";
+		return name+","+zipCode;
 	}
 }

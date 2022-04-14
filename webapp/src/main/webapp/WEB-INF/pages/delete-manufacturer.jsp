@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Home page</title>
+    <title>Confirm delete</title>
   </head>
   <body>
     <jsp:include page="/WEB-INF/pages/fragments/header.jsp"></jsp:include>
@@ -20,20 +20,20 @@
 				<th scope="col">Company id.number</th>
 				<th scope="col">Address</th>
 				<th scope="col">City</th>
-				<th scope="col">Action</th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${manufacturers}" var="manufacturer">
-		<c:url value="/application/manufacturer/delete?id=${manufacturer.id}" var="urlManufacturerDelete"></c:url>
+		
+		<c:url value="/application/manufacturer/delete/confirm?id=${manufacturer.id}" var="urlManufacturerDelete"></c:url>
 			<tr>
 				<td>${manufacturer.pib}</td>
 				<td>${manufacturer.cid}</td>
 				<td>${manufacturer.address}</td>
 				<td>${manufacturer.city}</td>
-				<td><a href="#" class="link-warning">Edit</a> <a href="${urlManufacturerDelete}" class="link-danger">Delete</a></td>
 			</tr>
-			</c:forEach>
+			<tr>
+				<td> Are you sure ? <a href="${urlManufacturerDelete}" class="link-danger">Delete</a> <a href="${urlManufacturerDelete}" class="link-info">Cancel</a></td>
+			</tr>
 		</tbody>
 	</table>
 	<div class="col-6">
