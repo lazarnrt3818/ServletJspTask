@@ -58,7 +58,8 @@
 				<label for="exampleInputPassword1" class="form-label">CID</label>
 				<input type="text" class="form-control"
 					id="exampleInputPassword1" name="cid" value="${manufacturer.cid}">
-				<p style="color:red;">${error_pib}</p>
+				<p style="color:red;">${error_cid}</p>
+				
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">Address</label>

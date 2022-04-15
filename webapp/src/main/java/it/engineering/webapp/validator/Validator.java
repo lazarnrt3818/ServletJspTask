@@ -6,5 +6,5 @@ import it.engineering.webapp.constraint.MyConstraint;
 
 public interface Validator<T> {
 
-	public List<String> validate(T obj);
+	public List<MyConstraint> validate(T obj);
 }

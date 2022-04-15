@@ -11,20 +11,20 @@ import it.engineering.webapp.domain.Manufacturer;
 public class ManufacturerValidator implements Validator<Manufacturer>{
 
 	@Override
-	public List<String> validate(Manufacturer obj) {
+	public List<MyConstraint> validate(Manufacturer obj) {
 		
-		List<String> constraints = new ArrayList<>();
+		List<MyConstraint> constraints = new ArrayList<>();
 		
 		if(!NumberUtils.isDigits(obj.getPib())) {
-			constraints.add(MyConstraint.CONTRAINT_MANUFACTURER_PIB);
+			constraints.add(MyConstraint.MANUFACTURER_PIB_NUMBER);
 		}
 		
 		if(!NumberUtils.isDigits(obj.getCid())) {
-			constraints.add(MyConstraint.CONTRAINT_MANUFACTURER_CID);
+			constraints.add(MyConstraint.MANUFACTURER_CID_NUMBER);
 		}
 		
 		if(obj.getAddress().isEmpty() || obj.getPib().isEmpty() || obj.getCid().isEmpty()) {
-			constraints.add(MyConstraint.CONTRAINT_MANUFACTURER_EMPTY_FIELD);
+			constraints.add(MyConstraint.MANUFACTURER_EMPTY_FIELD);
 		}
 		
 		return constraints;
