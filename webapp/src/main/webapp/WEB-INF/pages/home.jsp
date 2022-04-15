@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Home page</title>
+    <style>
+    	.input-error{
+    		border:1px solid red;
+    	}
+    </style>
   </head>
   <body>
     <jsp:include page="/WEB-INF/pages/fragments/header.jsp"></jsp:include>
@@ -49,21 +54,18 @@
 		</ul>
 		<form action="${urlManufacturerAdd}" >
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">PIB
-					address</label> <input type="text" class="form-control"
+				<label for="exampleInputEmail1" class="form-label">PIB</label> 
+				<input type="text" class="form-control ${error_pib}"
 					id="exampleInputEmail1" aria-describedby="emailHelp" name="pib" value="${manufacturer.pib}">
-				<p style="color:red;">${error_pib}</p>
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">CID</label>
-				<input type="text" class="form-control"
+				<input type="text" class="form-control ${error_cid}" 
 					id="exampleInputPassword1" name="cid" value="${manufacturer.cid}">
-				<p style="color:red;">${error_cid}</p>
-				
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">Address</label>
-				<input type="text" class="form-control"
+				<input type="text" class="form-control ${error_address}"
 					id="exampleInputPassword1" name="address" value="${manufacturer.address}">
 			</div>
 			<div class="mb-3">

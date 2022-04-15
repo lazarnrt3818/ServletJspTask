@@ -11,8 +11,6 @@ import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.constraint.MyConstraint;
 import it.engineering.webapp.domain.City;
 import it.engineering.webapp.domain.Manufacturer;
-import it.engineering.webapp.repository.CityRepository;
-import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.service.impl.CityServiceImpl;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 import it.engineering.webapp.validator.ManufacturerValidator;
@@ -49,11 +47,11 @@ public class ManufacturerAddAction extends AbstractAction{
 			
 			for(MyConstraint error : errors) {
 				if(error.equals(MyConstraint.MANUFACTURER_CID_NUMBER))
-					request.setAttribute("error_cid", error.getDesc());
+					request.setAttribute("error_cid", "input-error");
 				if(error.equals(MyConstraint.MANUFACTURER_PIB_NUMBER))
-					request.setAttribute("error_pib", error.getDesc());
+					request.setAttribute("error_pib", "input-error");
 				if(error.equals(MyConstraint.MANUFACTURER_EMPTY_FIELD))
-					request.setAttribute("empty_field", error.getDesc());
+					request.setAttribute("error_address", "input-error");
 			}
 			
 			
