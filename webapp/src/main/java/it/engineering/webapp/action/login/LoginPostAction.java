@@ -25,7 +25,7 @@ public class LoginPostAction extends AbstractAction {
 		if (user != null) {
 			
 			//users.add(user);
-
+			System.out.println("TEST");
 			HttpSession session = request.getSession(true);
 			ManufacturerRepository manufacturerRepo = new ManufacturerRepository();
 			CityRepository cityRepo = new CityRepository();
