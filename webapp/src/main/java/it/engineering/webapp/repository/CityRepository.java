@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import it.engineering.webapp.domain.City;
@@ -12,9 +13,16 @@ import it.engineering.webapp.util.MyEntityManagerFactory;
 
 public class CityRepository implements JpaCrudRepository<City, Long> {
 
+	
+private final EntityManagerFactory entityManagerFactory;
+	
+	public CityRepository() {
+		entityManagerFactory =  MyEntityManagerFactory.getInstance();
+	}
+	
 	@Override
 	public void save(City t) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(t);
 		manager.getTransaction().commit();
@@ -23,7 +31,7 @@ public class CityRepository implements JpaCrudRepository<City, Long> {
 
 	@Override
 	public Optional<City> getById(Long id) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		City user = manager.find(City.class, id);
 		
 		manager.close();
@@ -32,7 +40,7 @@ public class CityRepository implements JpaCrudRepository<City, Long> {
 
 	@Override
 	public void delete(Long id) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 
 		City user = manager.find(City.class, id);
 
@@ -44,7 +52,7 @@ public class CityRepository implements JpaCrudRepository<City, Long> {
 
 	@Override
 	public List<City> getAll() {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		Query query = manager.createQuery("SELECT c FROM City c");
 		
 		@SuppressWarnings("unchecked")
