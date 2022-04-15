@@ -14,7 +14,6 @@ public class ManufacturerAddAction extends AbstractAction{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		ManufacturerRepository manuRepo = new ManufacturerRepository();
 		CityRepository cityRepo = new CityRepository();
 		Manufacturer manufacturer = new Manufacturer();
 		manufacturer.setAddress(request.getParameter("address"));

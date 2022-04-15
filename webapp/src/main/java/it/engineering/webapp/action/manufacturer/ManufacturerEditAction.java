@@ -9,17 +9,23 @@ import it.engineering.webapp.domain.City;
 import it.engineering.webapp.domain.Manufacturer;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
+import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
-public class ManufacturerEditAction extends AbstractAction{
+public class ManufacturerEditAction extends AbstractAction {
+
+	private ManufacturerServiceImpl manufacturerService;
+
+	public ManufacturerEditAction() {
+		this.manufacturerService = new ManufacturerServiceImpl();
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		CityRepository cityRepo = new  CityRepository();
-		ManufacturerRepository manuRepo = new ManufacturerRepository();
+		CityRepository cityRepo = new CityRepository();
 		Long id = Long.parseLong(request.getParameter("id"));
-		Manufacturer manufacturer = manuRepo.getById(id).orElse(null);
-		
-		for(City c : cityRepo.getAll()) {
+		Manufacturer manufacturer = manufacturerService.find(id).orElse(null);
+
+		for (City c : cityRepo.getAll()) {
 			System.out.println(c.getName());
 		}
 		request.setAttribute("cities", cityRepo.getAll());

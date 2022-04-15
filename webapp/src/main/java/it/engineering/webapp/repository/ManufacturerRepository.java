@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import it.engineering.webapp.domain.Manufacturer;
@@ -11,9 +12,15 @@ import it.engineering.webapp.util.MyEntityManagerFactory;
 
 public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, Long>{
 
+	private final EntityManagerFactory entityManagerFactory;
+	
+	public ManufacturerRepository() {
+		entityManagerFactory =  MyEntityManagerFactory.getInstance();
+	}
+	
 	@Override
 	public List<Manufacturer> getAll() {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		Query query = manager.createQuery("SELECT m FROM Manufacturer m");
 		
 		@SuppressWarnings("unchecked")
@@ -24,7 +31,7 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public void save(Manufacturer manufacturer) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(manufacturer);
 		manager.getTransaction().commit();
@@ -33,7 +40,7 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public Optional<Manufacturer> getById(Long id) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
 		
 		manager.close();
@@ -42,7 +49,7 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public void delete(Long id) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
 		
 		manager.getTransaction().begin();
@@ -53,7 +60,7 @@ public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, L
 
 	@Override
 	public void update(Manufacturer t) {
-		EntityManager manager = MyEntityManagerFactory.getInstance().createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 	
 		Manufacturer manufacturer = manager.find(Manufacturer.class, t.getId());
 		

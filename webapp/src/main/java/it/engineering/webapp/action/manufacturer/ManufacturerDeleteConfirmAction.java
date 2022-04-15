@@ -8,18 +8,24 @@ import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
+import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
 public class ManufacturerDeleteConfirmAction extends AbstractAction{
 
+	private ManufacturerServiceImpl manufacturerService;
+
+	public ManufacturerDeleteConfirmAction() {
+		this.manufacturerService = new ManufacturerServiceImpl();
+	}
+	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO DELETE manufacturer
-		ManufacturerRepository manuRepo = new ManufacturerRepository();
 		CityRepository cityRepo = new CityRepository();
 		if(request.getParameter("option").equalsIgnoreCase("Delete")) {
-			manuRepo.delete(Long.parseLong(request.getParameter("id")));
+			manufacturerService.remove(Long.parseLong(request.getParameter("id")));
 		}
-		request.setAttribute("manufacturers", manuRepo.getAll());
+		request.setAttribute("manufacturers", manufacturerService.findAll());
 		request.setAttribute("cities", cityRepo.getAll());
 		return WebConstant.PAGE_HOME;
 	

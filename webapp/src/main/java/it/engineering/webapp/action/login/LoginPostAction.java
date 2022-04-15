@@ -12,8 +12,18 @@ import it.engineering.webapp.domain.User;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.repository.UserRepository;
+import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
 public class LoginPostAction extends AbstractAction {
+	
+	private ManufacturerServiceImpl manufacturerService;
+	
+	
+
+	public LoginPostAction() {
+		this.manufacturerService = new ManufacturerServiceImpl();
+	}
+
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -25,14 +35,12 @@ public class LoginPostAction extends AbstractAction {
 		if (user != null) {
 			
 			//users.add(user);
-			System.out.println("TEST");
 			HttpSession session = request.getSession(true);
-			ManufacturerRepository manufacturerRepo = new ManufacturerRepository();
 			CityRepository cityRepo = new CityRepository();
 			
 			User loginUser = user.clone();
 			session.setAttribute("loginUser",loginUser);
-			session.setAttribute("manufacturers", manufacturerRepo.getAll());
+			session.setAttribute("manufacturers", manufacturerService.findAll());
 			request.setAttribute("cities", cityRepo.getAll());
 			return WebConstant.PAGE_HOME;
 		} else {
