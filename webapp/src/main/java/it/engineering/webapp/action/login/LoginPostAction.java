@@ -12,16 +12,18 @@ import it.engineering.webapp.domain.User;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.repository.UserRepository;
+import it.engineering.webapp.service.impl.CityServiceImpl;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
 public class LoginPostAction extends AbstractAction {
 	
 	private ManufacturerServiceImpl manufacturerService;
-	
+	private CityServiceImpl cityService;
 	
 
 	public LoginPostAction() {
 		this.manufacturerService = new ManufacturerServiceImpl();
+		cityService = new CityServiceImpl();
 	}
 
 
@@ -36,12 +38,11 @@ public class LoginPostAction extends AbstractAction {
 			
 			//users.add(user);
 			HttpSession session = request.getSession(true);
-			CityRepository cityRepo = new CityRepository();
 			
 			User loginUser = user.clone();
 			session.setAttribute("loginUser",loginUser);
 			session.setAttribute("manufacturers", manufacturerService.findAll());
-			request.setAttribute("cities", cityRepo.getAll());
+			request.setAttribute("cities", cityService.findAll());
 			return WebConstant.PAGE_HOME;
 		} else {
 			request.setAttribute("error_message", "Wrong credentials !");

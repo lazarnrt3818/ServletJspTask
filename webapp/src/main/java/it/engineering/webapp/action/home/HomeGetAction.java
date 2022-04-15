@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
-import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
 public class HomeGetAction extends AbstractAction {
