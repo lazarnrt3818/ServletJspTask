@@ -39,21 +39,31 @@
 	<div class="col-6 container-sm">
 		<h4>Add new manufacturer:</h4>
 		<c:url value="/application/manufacturer/add" var="urlManufacturerAdd"></c:url>
+		
+		<ul>
+			<c:forEach items="${errors}" var="error">
+				<li>
+					${error}
+				</li>
+			</c:forEach>
+		</ul>
 		<form action="${urlManufacturerAdd}" >
 			<div class="mb-3">
 				<label for="exampleInputEmail1" class="form-label">PIB
 					address</label> <input type="text" class="form-control"
-					id="exampleInputEmail1" aria-describedby="emailHelp" name="pib">
+					id="exampleInputEmail1" aria-describedby="emailHelp" name="pib" value="${manufacturer.pib}">
+				<p style="color:red;">${error_pib}</p>
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">CID</label>
 				<input type="text" class="form-control"
-					id="exampleInputPassword1" name="cid">
+					id="exampleInputPassword1" name="cid" value="${manufacturer.cid}">
+				<p style="color:red;">${error_pib}</p>
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">Address</label>
 				<input type="text" class="form-control"
-					id="exampleInputPassword1" name="address">
+					id="exampleInputPassword1" name="address" value="${manufacturer.address}">
 			</div>
 			<div class="mb-3">
 				<select class="form-select" aria-label="Default select example"
