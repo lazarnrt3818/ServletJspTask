@@ -26,6 +26,7 @@ public class ManufacturerEditConfirmAction extends AbstractAction{
 			manufacturer.setCity(city);
 			manuRepo.update(manufacturer);
 		}
+		request.setAttribute("cities", cityRepo.getAll());
 		request.setAttribute("manufacturers", manuRepo.getAll());
 		return WebConstant.PAGE_HOME;
 	}
