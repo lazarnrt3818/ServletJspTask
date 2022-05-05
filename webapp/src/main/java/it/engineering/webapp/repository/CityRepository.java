@@ -4,65 +4,59 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
-import it.engineering.webapp.domain.City;
-import it.engineering.webapp.domain.User;
-import it.engineering.webapp.util.MyEntityManagerFactory;
+import org.springframework.stereotype.Repository;
 
-public class CityRepository implements JpaCrudRepository<City, Long> {
+import it.engineering.webapp.domain.CityEntity;
+
+@Repository("cityRepository")
+@Transactional(value = TxType.MANDATORY)
+public class CityRepository implements JpaCrudRepository<CityEntity, Long> {
 
 	
-private final EntityManagerFactory entityManagerFactory;
+	@PersistenceContext
+	private EntityManager entityManager;
 	
-	public CityRepository() {
-		entityManagerFactory =  MyEntityManagerFactory.getInstance();
-	}
-	
-	@Override
-	public void save(City t) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(t);
-		manager.getTransaction().commit();
-		manager.close();
-	}
 
 	@Override
-	public Optional<City> getById(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		City user = manager.find(City.class, id);
+	public void save(CityEntity t) {
+		entityManager.persist(t);
+		entityManager.close();
+	}
+
+	@Override
+	public Optional<CityEntity> getById(Long id) {
+		CityEntity user = entityManager.find(CityEntity.class, id);
 		
-		manager.close();
+		entityManager.close();
 		return Optional.of(user);
 	}
 
 	@Override
 	public void delete(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
 
-		City user = manager.find(City.class, id);
+		CityEntity user = entityManager.find(CityEntity.class, id);
 
-		manager.getTransaction().begin();
-		manager.remove(user);
-		manager.getTransaction().commit();
-		manager.close();
+		entityManager.remove(user);
+		entityManager.close();
 	}
 
 	@Override
-	public List<City> getAll() {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		Query query = manager.createQuery("SELECT c FROM City c");
+	public List<CityEntity> getAll() {
+		Query query = entityManager.createQuery("SELECT c FROM CityEntity c");
 		
 		@SuppressWarnings("unchecked")
-		List<City> cities = query.getResultList();
+		List<CityEntity> cities = query.getResultList();
 		
 		return cities;
 	}
 
 	@Override
-	public void update(City t) {
+	public void update(CityEntity t) {
 		// TODO Auto-generated method stub
 		
 	}

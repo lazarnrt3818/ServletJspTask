@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import it.engineering.webapp.domain.User;
+import it.engineering.webapp.domain.UserEntity;
 
 public class MyContextListener implements ServletContextListener  {
 	@Override
 	public void contextInitialized(ServletContextEvent sce)  { 
 		
-		sce.getServletContext().setAttribute("login_users", new ArrayList<User>());
+		sce.getServletContext().setAttribute("login_users", new ArrayList<UserEntity>());
     	
     }
 

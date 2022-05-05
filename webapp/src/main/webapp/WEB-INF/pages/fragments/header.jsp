@@ -13,8 +13,8 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         	
-        	<c:url value="/application/login" var="urlLogin"></c:url>
-        	<c:url value="/application/logout" var="urlLogout"></c:url>
+        	<c:url value="/login" var="urlLogin"></c:url>
+        	<c:url value="/logout" var="urlLogout"></c:url>
        
         	<c:if test="${loginUser == null}" >
 				<li class="nav-item"><a class="nav-link" href="${urlLogin}">Login</a></li>

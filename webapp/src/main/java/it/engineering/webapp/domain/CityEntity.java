@@ -3,9 +3,11 @@ package it.engineering.webapp.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class City {
+@Table(name = "city")
+public class CityEntity {
 	@Id
 	@Column(name = "Zip_code")
 	private Long zipCode;
@@ -15,13 +17,13 @@ public class City {
 		return zipCode;
 	}
 
-	public City(Long zipCode, String name) {
+	public CityEntity(Long zipCode, String name) {
 		super();
 		this.zipCode = zipCode;
 		this.name = name;
 	}
 
-	public City() {
+	public CityEntity() {
 		super();
 	}
 

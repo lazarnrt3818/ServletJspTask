@@ -4,75 +4,72 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
-import it.engineering.webapp.domain.Manufacturer;
-import it.engineering.webapp.util.MyEntityManagerFactory;
+import org.hibernate.query.spi.QueryParameterBindingTypeResolver;
+import org.springframework.stereotype.Repository;
 
-public class ManufacturerRepository implements JpaCrudRepository<Manufacturer, Long>{
+import it.engineering.webapp.domain.ManufacturerEntity;
 
-	private final EntityManagerFactory entityManagerFactory;
-	
-	public ManufacturerRepository() {
-		entityManagerFactory =  MyEntityManagerFactory.getInstance();
-	}
+@Repository("manufacturerRepository")
+@Transactional(value = TxType.MANDATORY)
+public class ManufacturerRepository implements JpaCrudRepository<ManufacturerEntity, Long>{
+
+	@PersistenceContext
+	private EntityManager entityManager;;
 	
 	@Override
-	public List<Manufacturer> getAll() {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		Query query = manager.createQuery("SELECT m FROM Manufacturer m");
+	public List<ManufacturerEntity> getAll() {
+		Query query = entityManager.createQuery("SELECT m FROM ManufacturerEntity m");
 		
 		@SuppressWarnings("unchecked")
-		List<Manufacturer> manufacturers = query.getResultList();
+		List<ManufacturerEntity> manufacturers = query.getResultList();
 		
 		return manufacturers;
 	}
 
 	@Override
-	public void save(Manufacturer manufacturer) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(manufacturer);
-		manager.getTransaction().commit();
-		manager.close();
+	public void save(ManufacturerEntity manufacturer) {
+		entityManager.persist(manufacturer);
+		entityManager.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<Manufacturer> getById(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
+	public Optional<ManufacturerEntity> getById(Long id) {
+		ManufacturerEntity manufacturer = entityManager.find(ManufacturerEntity.class, id);
 		
-		manager.close();
-		return Optional.of(manufacturer);
+		Query query = entityManager.createQuery("SELECT m FROM ManufacturerEntity m WHERE m.pib = "+id);
+		
+		entityManager.close();
+		return Optional.of((ManufacturerEntity)query.getSingleResult());
 	}
 
+	
+	// Get manufacturer by PIB, then delete it
 	@Override
 	public void delete(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		Manufacturer manufacturer = manager.find(Manufacturer.class, id);
-		
-		manager.getTransaction().begin();
-		manager.remove(manufacturer);
-		manager.getTransaction().commit();
-		manager.close();
+		ManufacturerEntity manufacturer = (ManufacturerEntity) entityManager.createQuery("SELECT m FROM ManufacturerEntity m WHERE pib ="+id).getSingleResult();
+		System.out.println("DELETE : " + manufacturer);
+		entityManager.remove(manufacturer);
+		entityManager.close();
 	}
 
 	@Override
-	public void update(Manufacturer t) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
+	public void update(ManufacturerEntity t) {
 	
-		Manufacturer manufacturer = manager.find(Manufacturer.class, t.getId());
+		ManufacturerEntity manufacturer = (ManufacturerEntity) entityManager.createQuery("SELECT m FROM ManufacturerEntity m WHERE pib ="+t.getPib()).getSingleResult();
 		
-		manager.getTransaction().begin();
 		if(manufacturer != null) {
 			manufacturer.setAddress(t.getAddress());
 			manufacturer.setCid(t.getCid());
 			manufacturer.setPib(t.getPib());
 			manufacturer.setCity(t.getCity());
 		}
-		manager.getTransaction().commit();
-		manager.close();
+		entityManager.close();
 	}
 
 

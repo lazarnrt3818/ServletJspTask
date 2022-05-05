@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
 import it.engineering.webapp.constraint.MyConstraint;
-import it.engineering.webapp.domain.City;
-import it.engineering.webapp.domain.Manufacturer;
+import it.engineering.webapp.domain.CityEntity;
+import it.engineering.webapp.domain.ManufacturerEntity;
 import it.engineering.webapp.service.impl.CityServiceImpl;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 import it.engineering.webapp.validator.ManufacturerValidator;
@@ -30,11 +30,11 @@ public class ManufacturerAddAction extends AbstractAction{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		Manufacturer manufacturer = new Manufacturer();
+		ManufacturerEntity manufacturer = new ManufacturerEntity();
 		String pib = request.getParameter("pib");
 		String cid = request.getParameter("cid");
 		String address = request.getParameter("address");
-		City city = cityService.find(Long.parseLong(request.getParameter("city"))).orElse(null);
+		CityEntity city = cityService.find(Long.parseLong(request.getParameter("city"))).orElse(null);
 		
 		manufacturer.setCity(city);
 		manufacturer.setAddress(address);

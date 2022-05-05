@@ -1,18 +1,12 @@
 package it.engineering.webapp.action.login;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
-import it.engineering.webapp.domain.User;
 import it.engineering.webapp.domain.dto.UserDto;
-import it.engineering.webapp.repository.CityRepository;
-import it.engineering.webapp.repository.ManufacturerRepository;
-import it.engineering.webapp.repository.UserRepository;
 import it.engineering.webapp.service.impl.CityServiceImpl;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 import it.engineering.webapp.service.impl.UserServiceImpl;

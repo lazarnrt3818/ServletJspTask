@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
-import it.engineering.webapp.domain.User;
+import it.engineering.webapp.domain.UserEntity;
 import it.engineering.webapp.repository.UserRepository;
 
 public class LoginGetAction extends AbstractAction {

@@ -3,24 +3,31 @@ package it.engineering.webapp.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import it.engineering.webapp.domain.User;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import it.engineering.webapp.domain.UserEntity;
 import it.engineering.webapp.domain.dto.UserDto;
+import it.engineering.webapp.repository.JpaCrudRepository;
 import it.engineering.webapp.repository.UserRepository;
 import it.engineering.webapp.service.UserService;
 
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
-	private final UserRepository userRepository;
-
-	public UserServiceImpl() {
-		this.userRepository = new UserRepository();
-	}
+	@Autowired
+	@Qualifier("userRepository")
+	private JpaCrudRepository<UserEntity, Long> userRepository;
 
 	@Override
 	public UserDto login(String username, String password) {
-		List<User> users = userRepository.getAll();
+		List<UserEntity> users = userRepository.getAll();
 		
-		for(User user : users) {
+		for(UserEntity user : users) {
 			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				return new UserDto(user.getUsername(),user.getFirstName(), user.getLastName());
 			}
@@ -30,12 +37,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void save(User user) {
+	public void save(UserEntity user) {
 		userRepository.save(user);
 	}
 
 	@Override
-	public Optional<User> find(Long id) {
+	public Optional<UserEntity> find(Long id) {
 		return userRepository.getById(id);
 	}
 
@@ -45,12 +52,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<UserEntity> findAll() {
 		return userRepository.getAll();
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(UserEntity user) {
 		userRepository.update(user);
 	}
 

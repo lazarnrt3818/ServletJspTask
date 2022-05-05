@@ -24,7 +24,7 @@
 		</thead>
 		<tbody>
 		
-		<c:url value="/application/manufacturer/delete/confirm?id=${manufacturer.id}" var="urlManufacturerDelete"></c:url>
+		<c:url value="/application/manufacturer/delete/confirm?id=${manufacturer.pib}" var="urlManufacturerDelete"></c:url>
 			<tr>
 				<td>${manufacturer.pib}</td>
 				<td>${manufacturer.cid}</td>

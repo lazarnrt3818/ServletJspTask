@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
-import it.engineering.webapp.domain.Manufacturer;
+import it.engineering.webapp.domain.ManufacturerEntity;
 import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.service.impl.ManufacturerServiceImpl;
 
@@ -20,7 +20,7 @@ public class ManufacturerDeleteAction extends AbstractAction {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		Long id = Long.parseLong(request.getParameter("id"));
-		Manufacturer manufacturer = manufacturerService.find(id).orElse(null);
+		ManufacturerEntity manufacturer = manufacturerService.find(id).orElse(null);
 		request.setAttribute("manufacturer", manufacturer);
 		return WebConstant.PAGE_MANUFACTURER_DELETE;
 	}

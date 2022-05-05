@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Manufacturer {
+@Table(name = "manufacturer")
+public class ManufacturerEntity {
 	@Id
 	@Column(name = "ID_manufacturer")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +22,9 @@ public class Manufacturer {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_city")
-	private City city;
+	private CityEntity city;
 
-	public Manufacturer(String pib, String cid, String address, City city) {
+	public ManufacturerEntity(String pib, String cid, String address, CityEntity city) {
 		super();
 		this.pib = pib;
 		this.cid = cid;
@@ -30,7 +32,7 @@ public class Manufacturer {
 		this.city = city;
 	}
 
-	public Manufacturer() {
+	public ManufacturerEntity() {
 		super();
 	}
 
@@ -66,11 +68,11 @@ public class Manufacturer {
 		this.address = address;
 	}
 
-	public City getCity() {
+	public CityEntity getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(CityEntity city) {
 		this.city = city;
 	}
 

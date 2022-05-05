@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_User")
@@ -21,11 +23,11 @@ public class User {
 	@Column(name = "Last_name")
 	private String lastName;
 
-	public User() {
+	public UserEntity() {
 		super();
 	}
 
-	public User(String username, String password, String firstName, String lastName) {
+	public UserEntity(String username, String password, String firstName, String lastName) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -73,8 +75,8 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public User clone() {
-		return new User(username, null, firstName, lastName);
+	public UserEntity clone() {
+		return new UserEntity(username, null, firstName, lastName);
 	}
 
 	@Override
@@ -96,7 +98,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserEntity other = (UserEntity) obj;
 		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 

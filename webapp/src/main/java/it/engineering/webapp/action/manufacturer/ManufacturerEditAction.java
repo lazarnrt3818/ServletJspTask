@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.action.AbstractAction;
 import it.engineering.webapp.constant.WebConstant;
-import it.engineering.webapp.domain.City;
-import it.engineering.webapp.domain.Manufacturer;
+import it.engineering.webapp.domain.CityEntity;
+import it.engineering.webapp.domain.ManufacturerEntity;
 import it.engineering.webapp.repository.CityRepository;
 import it.engineering.webapp.repository.ManufacturerRepository;
 import it.engineering.webapp.service.impl.CityServiceImpl;
@@ -25,7 +25,7 @@ public class ManufacturerEditAction extends AbstractAction {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		Long id = Long.parseLong(request.getParameter("id"));
-		Manufacturer manufacturer = manufacturerService.find(id).orElse(null);
+		ManufacturerEntity manufacturer = manufacturerService.find(id).orElse(null);
 
 		request.setAttribute("cities", cityService.findAll());
 		request.setAttribute("manufacturer", manufacturer);

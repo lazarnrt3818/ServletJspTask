@@ -4,67 +4,59 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
-import it.engineering.webapp.domain.User;
-import it.engineering.webapp.util.MyEntityManagerFactory;
+import org.springframework.stereotype.Repository;
 
-public class UserRepository implements JpaCrudRepository<User, Long> {
+import it.engineering.webapp.domain.UserEntity;
 
-	
+@Repository("userRepository")
+@Transactional(value = TxType.MANDATORY)
+public class UserRepository implements JpaCrudRepository<UserEntity, Long> {
 
-	private final EntityManagerFactory entityManagerFactory;
-	
-	public UserRepository() {
-		entityManagerFactory =  MyEntityManagerFactory.getInstance();
-	}
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	
 	@Override
-	public void save(User t) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(t);
-		manager.getTransaction().commit();
-		manager.close();
+	public void save(UserEntity t) {
+		entityManager.persist(t);
+		entityManager.close();
 	}
 
 	@Override
-	public Optional<User> getById(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		User user = manager.find(User.class, id);
+	public Optional<UserEntity> getById(Long id) {
+		UserEntity user = entityManager.find(UserEntity.class, id);
 		
-		manager.close();
+		entityManager.close();
 		return Optional.of(user);
 	}
 
 	@Override
 	public void delete(Long id) {
-		EntityManager manager = entityManagerFactory.createEntityManager();
 		
-		User user = manager.find(User.class, id);
+		UserEntity user = entityManager.find(UserEntity.class, id);
 		
-		manager.getTransaction().begin();
-		manager.remove(user);
-		manager.getTransaction().commit();
-		manager.close();
+		entityManager.remove(user);
+		entityManager.close();
 		
 	}
 
 	@Override
-	public List<User> getAll() {
-		EntityManager manager = entityManagerFactory.createEntityManager();
-		Query query = manager.createQuery("SELECT c FROM User c");
+	public List<UserEntity> getAll() {
+		Query query = entityManager.createQuery("SELECT c FROM UserEntity c");
 		
 		@SuppressWarnings("unchecked")
-		List<User> users = query.getResultList();
+		List<UserEntity> users = query.getResultList();
 		
 		return users;
 	}
 
 	@Override
-	public void update(User t) {
+	public void update(UserEntity t) {
 		// TODO Auto-generated method stub
 		
 	}

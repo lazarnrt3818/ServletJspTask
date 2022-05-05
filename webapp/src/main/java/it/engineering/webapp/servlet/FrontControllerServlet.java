@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.engineering.webapp.controller.ApplicationController;
 
-@WebServlet(urlPatterns = "/application/*")
+//@WebServlet(urlPatterns = "/application/*")
 public class FrontControllerServlet extends HttpServlet{
 	
 	private ApplicationController applicationController;
